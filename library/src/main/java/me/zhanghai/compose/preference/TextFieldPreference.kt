@@ -124,8 +124,12 @@ fun <T> TextFieldPreference(
         @Composable
         (value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit, onOk: () -> Unit) -> Unit =
         TextFieldPreferenceDefaults.TextField,
+    onDialogStateChange: ((Boolean) -> Unit)? = null,
 ) {
     var openDialog by rememberSaveable { mutableStateOf(false) }
+    PersistentLaunchedEffect(openDialog) {
+        onDialogStateChange?.invoke(openDialog)
+    }
     Preference(
         title = title,
         modifier = modifier,

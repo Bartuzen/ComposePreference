@@ -139,8 +139,12 @@ fun <T> ListPreference(
     valueToText: (T) -> AnnotatedString = { AnnotatedString(it.toString()) },
     item: @Composable (value: T, currentValue: T, onClick: () -> Unit) -> Unit =
         ListPreferenceDefaults.item(type, valueToText),
+    onSelectorStateChange: ((Boolean) -> Unit)? = null,
 ) {
     var openSelector by rememberSaveable { mutableStateOf(false) }
+    PersistentLaunchedEffect(openSelector) {
+        onSelectorStateChange?.invoke(openSelector)
+    }
     // Put DropdownMenu before Preference so that it can anchor to the right position.
     if (openSelector) {
         when (type) {

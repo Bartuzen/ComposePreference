@@ -125,8 +125,12 @@ fun <T> MultiSelectListPreference(
     valueToText: (T) -> AnnotatedString = { AnnotatedString(it.toString()) },
     item: @Composable (value: T, currentValues: Set<T>, onToggle: (Boolean) -> Unit) -> Unit =
         MultiSelectListPreferenceDefaults.item(valueToText),
+    onDialogStateChange: ((Boolean) -> Unit)? = null,
 ) {
     var openDialog by rememberSaveable { mutableStateOf(false) }
+    PersistentLaunchedEffect(openDialog) {
+        onDialogStateChange?.invoke(openDialog)
+    }
     Preference(
         title = title,
         modifier = modifier,
