@@ -146,8 +146,9 @@ fun <T> MultiSelectListPreference(
             onDismissRequest = { openDialog = false },
             title = title,
             buttons = {
+                val theme = LocalPreferenceTheme.current
                 TextButton(onClick = { openDialog = false }) {
-                    Text(text = stringResource(android.R.string.cancel))
+                    Text(text = theme.dialogCancelText)
                 }
                 TextButton(
                     onClick = {
@@ -155,7 +156,7 @@ fun <T> MultiSelectListPreference(
                         openDialog = false
                     }
                 ) {
-                    Text(text = stringResource(android.R.string.ok))
+                    Text(text = theme.dialogOkText)
                 }
             },
         ) {

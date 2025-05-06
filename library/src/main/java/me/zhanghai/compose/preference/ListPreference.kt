@@ -145,6 +145,7 @@ fun <T> ListPreference(
     PersistentLaunchedEffect(openSelector) {
         onSelectorStateChange?.invoke(openSelector)
     }
+    val theme = LocalPreferenceTheme.current
     // Put DropdownMenu before Preference so that it can anchor to the right position.
     if (openSelector) {
         when (type) {
@@ -154,7 +155,7 @@ fun <T> ListPreference(
                     title = title,
                     buttons = {
                         TextButton(onClick = { openSelector = false }) {
-                            Text(text = stringResource(android.R.string.cancel))
+                            Text(text = theme.dialogCancelText)
                         }
                     },
                 ) {
@@ -173,7 +174,6 @@ fun <T> ListPreference(
                 }
             }
             ListPreferenceType.DropdownMenu -> {
-                val theme = LocalPreferenceTheme.current
                 Box(
                     modifier = Modifier.fillMaxWidth().padding(theme.padding.copy(vertical = 0.dp))
                 ) {

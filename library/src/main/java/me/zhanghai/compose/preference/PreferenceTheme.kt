@@ -23,6 +23,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -43,6 +44,8 @@ class PreferenceTheme(
     val summaryColor: Color,
     val summaryTextStyle: TextStyle,
     val dividerHeight: Dp,
+    val dialogOkText: String,
+    val dialogCancelText: String,
 )
 
 @Composable
@@ -62,6 +65,8 @@ fun preferenceTheme(
     summaryColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     summaryTextStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     dividerHeight: Dp = 32.dp,
+    dialogOkText: String = stringResource(android.R.string.ok),
+    dialogCancelText: String = stringResource(android.R.string.cancel),
 ) =
     PreferenceTheme(
         categoryPadding = categoryPadding,
@@ -78,6 +83,8 @@ fun preferenceTheme(
         summaryColor = summaryColor,
         summaryTextStyle = summaryTextStyle,
         dividerHeight = dividerHeight,
+        dialogOkText = dialogOkText,
+        dialogCancelText = dialogCancelText,
     )
 
 val LocalPreferenceTheme =

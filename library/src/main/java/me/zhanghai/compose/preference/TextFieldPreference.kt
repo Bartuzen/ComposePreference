@@ -156,10 +156,11 @@ fun <T> TextFieldPreference(
             onDismissRequest = { openDialog = false },
             title = title,
             buttons = {
+                val theme = LocalPreferenceTheme.current
                 TextButton(onClick = { openDialog = false }) {
-                    Text(text = stringResource(android.R.string.cancel))
+                    Text(text = theme.dialogCancelText)
                 }
-                TextButton(onClick = onOk) { Text(text = stringResource(android.R.string.ok)) }
+                TextButton(onClick = onOk) { Text(text = theme.dialogOkText) }
             },
         ) {
             val focusRequester = remember { FocusRequester() }
