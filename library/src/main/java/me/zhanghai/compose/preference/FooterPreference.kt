@@ -59,7 +59,7 @@ fun FooterPreference(
     )
 }
 
-private object FooterPreferenceDefaults {
+object FooterPreferenceDefaults {
     val Icon: @Composable () -> Unit = {
         Icon(imageVector = Icons.Outlined.Info, contentDescription = null)
     }

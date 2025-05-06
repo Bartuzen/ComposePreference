@@ -199,8 +199,7 @@ fun <T> ListPreference(
     }
 }
 
-@PublishedApi
-internal object ListPreferenceDefaults {
+object ListPreferenceDefaults {
     fun <T> item(
         type: ListPreferenceType,
         valueToText: (T) -> AnnotatedString,
@@ -219,7 +218,7 @@ internal object ListPreferenceDefaults {
         }
 
     @Composable
-    private fun <T> DialogItem(
+    fun <T> DialogItem(
         value: T,
         currentValue: T,
         valueToText: (T) -> AnnotatedString,
@@ -245,7 +244,7 @@ internal object ListPreferenceDefaults {
     }
 
     @Composable
-    private fun <T> DropdownMenuItem(
+    fun <T> DropdownMenuItem(
         value: T,
         currentValue: T,
         valueToText: (T) -> AnnotatedString,

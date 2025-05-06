@@ -170,8 +170,7 @@ fun <T> MultiSelectListPreference(
     }
 }
 
-@PublishedApi
-internal object MultiSelectListPreferenceDefaults {
+object MultiSelectListPreferenceDefaults {
     fun <T> item(
         valueToText: (T) -> AnnotatedString
     ): @Composable (value: T, currentValues: Set<T>, onToggle: (Boolean) -> Unit) -> Unit =
@@ -180,7 +179,7 @@ internal object MultiSelectListPreferenceDefaults {
         }
 
     @Composable
-    private fun <T> Item(
+    fun <T> Item(
         value: T,
         currentValues: Set<T>,
         valueToText: (T) -> AnnotatedString,

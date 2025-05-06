@@ -172,8 +172,7 @@ fun <T> TextFieldPreference(
     }
 }
 
-@PublishedApi
-internal object TextFieldPreferenceDefaults {
+object TextFieldPreferenceDefaults {
     val TextField:
         @Composable
         (value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit, onOk: () -> Unit) -> Unit =
