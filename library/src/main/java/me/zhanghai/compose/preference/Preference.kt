@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.dp
 
 fun LazyListScope.preference(
     key: String,
-    title: @Composable () -> Unit,
+    title: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier.fillMaxWidth(),
     enabled: Boolean = true,
     icon: @Composable (() -> Unit)? = null,
@@ -61,7 +61,7 @@ fun LazyListScope.preference(
 
 @Composable
 fun Preference(
-    title: @Composable () -> Unit,
+    title: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     icon: @Composable (() -> Unit)? = null,
@@ -81,13 +81,15 @@ fun Preference(
                         )
                     )
             ) {
-                CompositionLocalProvider(
-                    LocalContentColor provides
-                        theme.titleColor.let {
-                            if (enabled) it else it.copy(alpha = theme.disabledOpacity)
-                        }
-                ) {
-                    ProvideTextStyle(value = theme.titleTextStyle, content = title)
+                if (title != null) {
+                    CompositionLocalProvider(
+                        LocalContentColor provides
+                            theme.titleColor.let {
+                                if (enabled) it else it.copy(alpha = theme.disabledOpacity)
+                            }
+                    ) {
+                        ProvideTextStyle(value = theme.titleTextStyle, content = title)
+                    }
                 }
                 if (summary != null) {
                     CompositionLocalProvider(

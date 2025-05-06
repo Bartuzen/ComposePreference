@@ -27,7 +27,7 @@ import androidx.compose.ui.Modifier
 
 fun LazyListScope.basicPreference(
     key: String,
-    textContainer: @Composable () -> Unit,
+    textContainer: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier.fillMaxWidth(),
     enabled: Boolean = true,
     iconContainer: @Composable () -> Unit = {},
@@ -48,7 +48,7 @@ fun LazyListScope.basicPreference(
 
 @Composable
 fun BasicPreference(
-    textContainer: @Composable () -> Unit,
+    textContainer: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     iconContainer: @Composable () -> Unit = {},
@@ -67,7 +67,7 @@ fun BasicPreference(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         iconContainer()
-        Box(modifier = Modifier.weight(1f)) { textContainer() }
+        Box(modifier = Modifier.weight(1f)) { textContainer?.invoke() }
         widgetContainer()
     }
 }
