@@ -22,7 +22,7 @@ plugins {
 }
 
 android {
-    namespace = "me.zhanghai.compose.preference"
+    namespace = "dev.bartuzen.compose.preference"
     buildToolsVersion = "35.0.0"
     compileSdk = 35
     defaultConfig {
@@ -52,4 +52,28 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
+}
+
+mavenPublishing {
+    signAllPublications()
+    coordinates("dev.bartuzen", "composepreference", "1.1.1")
+    pom {
+        name.set("ComposePreference")
+        description.set("Compose Preference library")
+        inceptionYear.set("2023")
+        url.set("https://github.com/Bartuzen/ComposePreference")
+        licenses {
+            license {
+                name.set("The Apache Software License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+            }
+        }
+        developers {
+            developer {
+                id.set("Bartuzen")
+                name.set("Bartu Özen")
+                url.set("https://github.com/Bartuzen")
+            }
+        }
+    }
 }

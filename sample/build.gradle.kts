@@ -21,15 +21,15 @@ plugins {
 }
 
 android {
-    namespace = "me.zhanghai.compose.preference.sample"
+    namespace = "dev.bartuzen.compose.preference.sample"
     buildToolsVersion = "35.0.0"
     compileSdk = 35
     defaultConfig {
-        applicationId = "me.zhanghai.compose.preference.sample"
+        applicationId = "dev.bartuzen.compose.preference.sample"
         minSdk = 21
         targetSdk = 35
-        versionCode = (extra["VERSION_CODE"] as String).toInt()
-        versionName = extra["VERSION_NAME"] as String
+        versionCode = 1
+        versionName = "1.0.0"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
