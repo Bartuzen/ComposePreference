@@ -141,7 +141,7 @@ fun SampleScreen() {
                 values = listOf("Alpha", "Beta", "Canary"),
                 title = { Text(text = "List preference (dropdown menu)") },
                 summary = { Text(text = it) },
-                type = ListPreferenceType.DROPDOWN_MENU,
+                type = ListPreferenceType.DropdownMenu,
             )
             multiSelectListPreference(
                 key = "multi_select_list_preference",

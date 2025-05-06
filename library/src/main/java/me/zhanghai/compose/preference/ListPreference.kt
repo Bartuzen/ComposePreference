@@ -56,8 +56,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 enum class ListPreferenceType {
-    ALERT_DIALOG,
-    DROPDOWN_MENU,
+    AlertDialog,
+    DropdownMenu,
 }
 
 inline fun <T> LazyListScope.listPreference(
@@ -72,7 +72,7 @@ inline fun <T> LazyListScope.listPreference(
     crossinline enabled: (T) -> Boolean = { true },
     noinline icon: @Composable ((T) -> Unit)? = null,
     noinline summary: @Composable ((T) -> Unit)? = null,
-    type: ListPreferenceType = ListPreferenceType.ALERT_DIALOG,
+    type: ListPreferenceType = ListPreferenceType.AlertDialog,
     noinline valueToText: (T) -> AnnotatedString = { AnnotatedString(it.toString()) },
     noinline item: @Composable (value: T, currentValue: T, onClick: () -> Unit) -> Unit =
         ListPreferenceDefaults.item(type, valueToText),
@@ -104,7 +104,7 @@ fun <T> ListPreference(
     enabled: Boolean = true,
     icon: @Composable (() -> Unit)? = null,
     summary: @Composable (() -> Unit)? = null,
-    type: ListPreferenceType = ListPreferenceType.ALERT_DIALOG,
+    type: ListPreferenceType = ListPreferenceType.AlertDialog,
     valueToText: (T) -> AnnotatedString = { AnnotatedString(it.toString()) },
     item: @Composable (value: T, currentValue: T, onClick: () -> Unit) -> Unit =
         ListPreferenceDefaults.item(type, valueToText),
@@ -135,7 +135,7 @@ fun <T> ListPreference(
     enabled: Boolean = true,
     icon: @Composable (() -> Unit)? = null,
     summary: @Composable (() -> Unit)? = null,
-    type: ListPreferenceType = ListPreferenceType.ALERT_DIALOG,
+    type: ListPreferenceType = ListPreferenceType.AlertDialog,
     valueToText: (T) -> AnnotatedString = { AnnotatedString(it.toString()) },
     item: @Composable (value: T, currentValue: T, onClick: () -> Unit) -> Unit =
         ListPreferenceDefaults.item(type, valueToText),
@@ -148,7 +148,7 @@ fun <T> ListPreference(
     // Put DropdownMenu before Preference so that it can anchor to the right position.
     if (openSelector) {
         when (type) {
-            ListPreferenceType.ALERT_DIALOG -> {
+            ListPreferenceType.AlertDialog -> {
                 PreferenceAlertDialog(
                     onDismissRequest = { openSelector = false },
                     title = title,
@@ -172,7 +172,7 @@ fun <T> ListPreference(
                     }
                 }
             }
-            ListPreferenceType.DROPDOWN_MENU -> {
+            ListPreferenceType.DropdownMenu -> {
                 val theme = LocalPreferenceTheme.current
                 Box(
                     modifier = Modifier.fillMaxWidth().padding(theme.padding.copy(vertical = 0.dp))
@@ -209,12 +209,12 @@ object ListPreferenceDefaults {
         valueToText: (T) -> AnnotatedString,
     ): @Composable (value: T, currentValue: T, onClick: () -> Unit) -> Unit =
         when (type) {
-            ListPreferenceType.ALERT_DIALOG -> {
+            ListPreferenceType.AlertDialog -> {
                 { value, currentValue, onClick ->
                     DialogItem(value, currentValue, valueToText, onClick)
                 }
             }
-            ListPreferenceType.DROPDOWN_MENU -> {
+            ListPreferenceType.DropdownMenu -> {
                 { value, currentValue, onClick ->
                     DropdownMenuItem(value, currentValue, valueToText, onClick)
                 }
