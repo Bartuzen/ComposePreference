@@ -54,6 +54,22 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
 }
 
+publishing {
+    repositories {
+        maven {
+            name = "GitLab"
+            url = uri ("https://gitlab.com/api/v4/projects/69663547/packages/maven")
+            credentials(HttpHeaderCredentials::class) {
+                name = "Private-Token"
+                value = findProperty("gitlabToken") as String? ?: System.getenv("GITLAB_TOKEN")
+            }
+            authentication {
+                create<HttpHeaderAuthentication>("header")
+            }
+        }
+    }
+}
+
 mavenPublishing {
     signAllPublications()
     coordinates("dev.bartuzen", "composepreference", "1.1.1")
