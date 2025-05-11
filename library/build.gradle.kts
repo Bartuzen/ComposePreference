@@ -70,7 +70,7 @@ publishing {
 
 mavenPublishing {
     signAllPublications()
-    coordinates("dev.bartuzen", "composepreference", "2.0.0")
+    coordinates("dev.bartuzen", "composepreference", "3.0.0")
     pom {
         name.set("ComposePreference")
         description.set("Compose Preference library")
