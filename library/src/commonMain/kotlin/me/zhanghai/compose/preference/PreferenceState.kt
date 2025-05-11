@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
+package me.zhanghai.compose.preference
 
-rootProject.name = "ComposePreference"
-include(":library")
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.State
+import kotlinx.coroutines.flow.MutableStateFlow
+
+@Composable
+fun <T> rememberPreferenceState(
+    key: String,
+    defaultValue: T,
+    flow: MutableStateFlow<Preferences>? = LocalPreferenceFlow.current,
+): MutableState<T> {
+    throw UnsupportedOperationException("Not implemented")
+}

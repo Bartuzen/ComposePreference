@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
+package me.zhanghai.compose.preference
 
-rootProject.name = "ComposePreference"
-include(":library")
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import kotlinx.coroutines.flow.MutableStateFlow
+
+val LocalPreferenceFlow =
+    compositionLocalOf<MutableStateFlow<Preferences>?> { noLocalProvidedFor("LocalPreferenceFlow") }
+
+@Composable
+fun ProvidePreferenceFlow(
+    flow: MutableStateFlow<Preferences>,
+    content: @Composable () -> Unit,
+) {
+    CompositionLocalProvider(LocalPreferenceFlow provides flow, content = content)
+}

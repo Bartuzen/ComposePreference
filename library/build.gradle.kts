@@ -13,45 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
     id("com.android.library")
-    kotlin("android")
-    kotlin("plugin.compose")
+    kotlin("multiplatform")
+    id("org.jetbrains.compose")
     id("com.vanniktech.maven.publish")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
-android {
-    namespace = "dev.bartuzen.compose.preference"
-    buildToolsVersion = "35.0.0"
-    compileSdk = 35
-    defaultConfig {
-        minSdk = 21
-        consumerProguardFiles("proguard-rules.pro")
+kotlin {
+    androidTarget()
+    jvm()
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
-    buildFeatures { compose = true }
-    packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
-    buildTypes {
-        release {
-            isMinifyEnabled = false
+
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(compose.material3)
+                implementation(compose.components.uiToolingPreview)
+                implementation(compose.materialIconsExtended)
+
+                implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel:2.8.4")
+            }
         }
     }
 }
 
-dependencies {
-    implementation(platform("androidx.compose:compose-bom:2024.11.00"))
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    implementation("androidx.core:core-ktx:1.15.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
+android {
+    namespace = "dev.bartuzen.compose.preference"
+    compileSdk = 35
 }
 
 publishing {
