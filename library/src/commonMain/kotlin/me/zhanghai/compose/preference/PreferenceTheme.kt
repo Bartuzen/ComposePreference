@@ -43,6 +43,7 @@ class PreferenceTheme(
     val summaryColor: Color,
     val summaryTextStyle: TextStyle,
     val dividerHeight: Dp,
+    val useTextButtonForDialogConfirmation: Boolean,
     val dialogOkText: String,
     val dialogCancelText: String,
 )
@@ -64,6 +65,7 @@ fun preferenceTheme(
     summaryColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     summaryTextStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     dividerHeight: Dp = 32.dp,
+    useTextButtonForDialogConfirmation: Boolean = true,
     dialogOkText: String = "OK",
     dialogCancelText: String = "Cancel",
 ) =
@@ -82,6 +84,7 @@ fun preferenceTheme(
         summaryColor = summaryColor,
         summaryTextStyle = summaryTextStyle,
         dividerHeight = dividerHeight,
+        useTextButtonForDialogConfirmation = useTextButtonForDialogConfirmation,
         dialogOkText = dialogOkText,
         dialogCancelText = dialogCancelText,
     )

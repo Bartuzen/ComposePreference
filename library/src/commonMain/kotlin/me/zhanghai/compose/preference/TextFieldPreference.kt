@@ -23,6 +23,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -159,7 +160,11 @@ fun <T> TextFieldPreference(
                 TextButton(onClick = { openDialog = false }) {
                     Text(text = theme.dialogCancelText)
                 }
-                TextButton(onClick = onOk) { Text(text = theme.dialogOkText) }
+                if (theme.useTextButtonForDialogConfirmation) {
+                    TextButton(onClick = onOk) { Text(text = theme.dialogOkText) }
+                } else {
+                    Button(onClick = onOk) { Text(text = theme.dialogOkText) }
+                }
             },
         ) {
             val focusRequester = remember { FocusRequester() }

@@ -29,6 +29,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -62,7 +63,7 @@ inline fun <T> LazyListScope.multiSelectListPreference(
     noinline summary: @Composable ((Set<T>) -> Unit)? = null,
     noinline valueToText: (T) -> AnnotatedString = { AnnotatedString(it.toString()) },
     noinline item:
-        @Composable
+    @Composable
         (value: T, currentValues: Set<T>, onToggle: (Boolean) -> Unit) -> Unit =
         MultiSelectListPreferenceDefaults.item(valueToText),
 ) {
@@ -149,13 +150,24 @@ fun <T> MultiSelectListPreference(
                 TextButton(onClick = { openDialog = false }) {
                     Text(text = theme.dialogCancelText)
                 }
-                TextButton(
-                    onClick = {
-                        onValueChange(dialogValue)
-                        openDialog = false
+                if (theme.useTextButtonForDialogConfirmation) {
+                    TextButton(
+                        onClick = {
+                            onValueChange(dialogValue)
+                            openDialog = false
+                        }
+                    ) {
+                        Text(text = theme.dialogOkText)
                     }
-                ) {
-                    Text(text = theme.dialogOkText)
+                } else {
+                    Button(
+                        onClick = {
+                            onValueChange(dialogValue)
+                            openDialog = false
+                        }
+                    ) {
+                        Text(text = theme.dialogOkText)
+                    }
                 }
             },
         ) {
