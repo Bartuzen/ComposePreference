@@ -41,7 +41,7 @@ kotlin {
                 implementation(compose.components.uiToolingPreview)
                 implementation(compose.materialIconsExtended)
 
-                implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel:2.8.4")
+                implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel:2.9.0")
             }
         }
     }
@@ -50,13 +50,28 @@ kotlin {
 android {
     namespace = "dev.bartuzen.compose.preference"
     compileSdk = 35
+    defaultConfig {
+        minSdk = 21
+        consumerProguardFiles("proguard-rules.pro")
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    buildFeatures { compose = true }
+    packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+        }
+    }
 }
 
 publishing {
     repositories {
         maven {
             name = "GitLab"
-            url = uri ("https://gitlab.com/api/v4/projects/69663547/packages/maven")
+            url = uri("https://gitlab.com/api/v4/projects/69663547/packages/maven")
             credentials(HttpHeaderCredentials::class) {
                 name = "Private-Token"
                 value = findProperty("gitlabToken") as String? ?: System.getenv("GITLAB_TOKEN")
